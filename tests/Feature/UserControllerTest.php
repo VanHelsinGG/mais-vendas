@@ -25,7 +25,7 @@ class UserControllerTest extends TestCase
         $response = $this->post('/api/users', $payload);
 
         $response->assertStatus(201);
-        $response->assertSimilarJson(['info' => 'User created successfully']);
+        $response->assertSimilarJson(['info' => ['users' => 'User created successfully']]);
 
         $createdUser = User::where('email', $payload['email'])->first();
 
@@ -77,5 +77,15 @@ class UserControllerTest extends TestCase
             $response->assertFound();
             $response->assertExactJson(['info' => ['user' => json_decode($user->toJson(), true)]]);
         }
+    }
+
+    public function testIfIsPossibleToDeleteASpecificUser(): void
+    {
+        $user = User::factory()->create();
+
+        $response = $this->delete('/api/users/' . $user->uuid);
+
+        $response->assertOk();
+        $response->assertExactJson(['info' => ['users' => 'user `'.$user->uuid.'` deleted succesfully']]);
     }
 }

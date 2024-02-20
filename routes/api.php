@@ -18,3 +18,4 @@ use App\Http\Controllers\UserController;
 Route::post('/users', [UserController::class, 'create']);
 Route::get('/users', [UserController::class, 'getAll']);
 Route::get('/users/{userUUID}', [UserController::class, 'find']);
+Route::delete('/users/{userUUID}', [UserController::class, 'delete']);
