@@ -2,7 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\ClientController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,7 +15,8 @@ use App\Http\Controllers\UserController;
 |
 */
 
-Route::post('/users', [UserController::class, 'create']);
-Route::get('/users', [UserController::class, 'getAll']);
-Route::get('/users/{userUUID}', [UserController::class, 'find']);
-Route::delete('/users/{userUUID}', [UserController::class, 'delete']);
+Route::post('/clients', [ClientController::class, 'create']);
+Route::get('/clients', [ClientController::class, 'getAll']);
+Route::get('/clients/{clientsUUID}', [ClientController::class, 'find']);
+Route::delete('/clients/{clientsUUID}', [ClientController::class, 'delete']);
+Route::patch('/clients/{clientsUUID}/accredited', [ClientController::class, 'changeAccreditedStatus']);

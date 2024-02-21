@@ -22,7 +22,7 @@ A API segue o padrão MVC com implementação de um service para a regra de neg�
 
 ### v0.1
 
-[] Endpoints básicos para os modelos
-[] Relacionamento entre os modelos
-[] Desenvolvimento pautado em testes
-[] Utilização de autenticação e autorização com JWT
+- [] Endpoints básicos para os modelos
+- [] Relacionamento entre os modelos
+- [X] Desenvolvimento pautado em testes
+- [] Utilização de autenticação e autorização com JWT

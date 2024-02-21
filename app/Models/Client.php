@@ -10,7 +10,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
-class User extends Authenticatable
+class Client extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable, HasUuids;
 
@@ -28,20 +28,5 @@ class User extends Authenticatable
         'accredited'
     ];
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
-     */
-    protected $hidden = [
-    ];
 
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array<string, string>
-     */
-    protected $casts = [
-        'accredited' => 'bollean',
-    ];
 }
