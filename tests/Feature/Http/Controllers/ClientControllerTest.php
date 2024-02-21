@@ -34,7 +34,7 @@ class ClientControllerTest extends TestCase
 
         $createdClient->delete();
     }
-
+    
     /**
      * @group ClientTests
      */
@@ -109,7 +109,7 @@ class ClientControllerTest extends TestCase
     {
         $client = Client::factory()->create();
 
-        $response = $this->patch('/api/clients/' . $client->uuid .'/accredited');
+        $response = $this->patch('/api/clients/' . $client->uuid . '/accredited');
 
         $response->assertOk();
         $response->assertExactJson(['info' => ['client' => 'Client `' . $client->uuid . '` accredited status changed to `' . (!$client->accredited) . '`']]);
