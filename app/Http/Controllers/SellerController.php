@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\DTO\Input\Seller\CreateSellerDTO;
 use App\Models\Seller;
+use App\Services\SellerService;
+use Dflydev\DotAccessData\Exception\DataException;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Hash;
@@ -10,19 +13,26 @@ use Illuminate\Validation\Rules\Password as PasswordRules;
 
 class SellerController extends Controller
 {
+    protected $service;
+
+    public function __construct(SellerService $sellerService)
+    {
+        $this->service = $sellerService;
+    }
+
     public function create(Request $request): JsonResponse
     {
         $request->validate([
             'password' => ['required', PasswordRules::min(8)],
         ]);
 
-        // TODO: AccessCode system
-        $accessCode = rand(10000,99999);
+        $DTO = new CreateSellerDTO($request->input('password'));
 
-        $seller = Seller::create([
-            'access_code' => $accessCode,
-            'password' => Hash::make($request->input('password')),
-        ]);
+        try {
+            $this->service->createSeller($DTO);
+        } catch (DataException $e) {
+            return response()->json(['errors' => ['access_level' => $e->getMessage()]], 400);
+        }
 
         return response()->json(['info' => ['seller' => 'Seller created successfully']], 201);
     }
